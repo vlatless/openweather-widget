@@ -1,0 +1,24 @@
+{
+	"name": "weather-widget",
+	"version": "1.0.0",
+	"scripts": {
+		"start": "vite --port 44088",
+		"build": "vite build",
+		"serve": "vite preview --port 1337 --host 0.0.0.0"
+	},
+	"dependencies": {
+		"tslib": "^2.3.1",
+		"vue": "^3.2.26",
+		"vuex": "^4.0.2"
+	},
+	"devDependencies": {
+		"@types/node": "^17.0.29",
+		"@vitejs/plugin-vue": "^1.9.3",
+		"sass": "^1.44.0",
+		"typescript": "^4.4.3",
+		"vite": "^2.6.4",
+		"vscode-typescript-languageservice": "^0.29.8",
+		"vscode-vue-languageservice": "^0.29.8",
+		"vue-tsc": "^0.3.0"
+	}
+}
