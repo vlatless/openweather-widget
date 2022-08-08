@@ -1,15 +1,20 @@
-.settings {
-
-}
-
 .settings__container {
     grid-template-areas: 
     "h h h e"
     "list list list list";
+    grid-template-rows: 20px auto;
+    row-gap: 8px;
 }
 
-.edit__button {
-    grid-area: e;
+.search__button {
+    height: fit-content;
+    width: fit-content;
+}
+
+.input__group {
+    align-items: center;
+    column-gap: 10px;
+    grid-template-columns: auto 16px;
 }
 
 .locations__container {
@@ -25,7 +30,7 @@
     grid-template-columns: 1fr 15fr 1fr;
     cursor: pointer;
     border-bottom: 1px solid black;
-    margin-bottom: 5px;
+
     &:hover {
         color: blue
     }

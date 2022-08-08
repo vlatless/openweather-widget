@@ -1,6 +1,12 @@
 <template>
     <div class="settings">
         <div class="container settings__container">
+            <div class="container input__group">
+                <input class="input search__input" placeholder="Search new location">
+                <button class="button search__button">
+                    <img class="icon icon__default" src="../assets/svg/search.svg"/>
+                </button>
+            </div>
             <div class="container locations__container">
                 <VueDraggableNext v-model="locations">
                     <div v-for="(location, index) in locations" :key="index" class="text location">
