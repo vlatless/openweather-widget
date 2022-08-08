@@ -1,0 +1,33 @@
+.settings {
+
+}
+
+.settings__container {
+    grid-template-areas: 
+    "h h h e"
+    "list list list list";
+}
+
+.edit__button {
+    grid-area: e;
+}
+
+.locations__container {
+    height: 30%;
+    width: 100%;
+    overflow-y: scroll;
+    border-radius: 5px;
+    grid-area: list;
+}
+
+.location {
+    display: grid;
+    grid-template-columns: 1fr 15fr 1fr;
+    cursor: pointer;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+    &:hover {
+        color: blue
+    }
+}
+ 

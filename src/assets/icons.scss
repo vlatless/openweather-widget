@@ -12,5 +12,10 @@
     &.gear__icon {
         height: 16px;
         width: 16px;
+
+        &:hover {
+           transform: rotateZ(180deg);
+           transition-duration: 800ms;
+        }
     }
 }

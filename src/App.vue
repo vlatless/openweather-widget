@@ -5,5 +5,6 @@
 <script setup lang="ts">
 import './assets/_index.scss';
 
-import Widget from './components/Widget.vue';
+import Widget from "./components/Widget.vue";
+import Settings from "./components/Settings.vue"
 </script>
