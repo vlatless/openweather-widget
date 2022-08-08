@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="container current_weather_parameters">
-                    <div class="text parameter feels_like__parameter"><b>Feels like</b> +20 </div>
+                    <div class="text temperature parameter feels_like__parameter"><b>Feels like</b> +20 </div>
                     <div class="text parameter wind__parameter">Wind: 3 ms, W </div>
                     <div class="text parameter pressure__parameter">Pressure: 756mmHg</div>
                 </div>
