@@ -1,0 +1,17 @@
+.text {
+    font-family: Roboto;
+}
+
+.header {
+    font-size: 25px;
+}
+
+.container {
+    display: grid;
+}
+
+.temperature {
+    &:after {
+        content: "°";
+    }
+}

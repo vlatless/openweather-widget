@@ -1,6 +1,35 @@
 .widget {
-    width: 400px;
-    height: 240px;
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
     border: 1px solid black;
     border-radius: 10px;
+
+    .head__container {
+        align-items: center;
+        grid-template-columns: auto 16px;
+    }
+
+    .widget__container {
+        grid-template-columns: 80px 150px 200px;
+    }
+
+    .current_temperature_container {
+        grid-template-areas:
+        "ct ct ct"
+        "mint maxt .";
+
+        .current__temperature {
+            font-size: 50px;
+            grid-area: ct;
+        }
+
+        #min__temperature{
+            grid-area: mint;
+        }
+
+        #max__temperature{
+            grid-area: maxt;
+        }
+    }
 }

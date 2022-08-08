@@ -1,0 +1,16 @@
+.icon {
+    &.icon__default {
+        height: 16px;
+        width: 16px;
+    }
+
+    &.current_weather_icon {
+        height: 64px;
+        width: 64px;
+    }
+
+    &.gear__icon {
+        height: 16px;
+        width: 16px;
+    }
+}
