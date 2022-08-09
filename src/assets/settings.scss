@@ -3,7 +3,7 @@
     "h h h e"
     "list list list list";
     grid-template-rows: 20px auto;
-    row-gap: 8px;
+    row-gap: 10px;
 }
 
 .search__button {
@@ -23,6 +23,10 @@
     overflow-y: scroll;
     border-radius: 5px;
     grid-area: list;
+
+    &:last-child {
+       border-bottom: none;
+    }
 }
 
 .location {
@@ -33,6 +37,10 @@
 
     &:hover {
         color: blue
+    }
+
+    &:last-of-type {
+        border-bottom: none;
     }
 }
  
