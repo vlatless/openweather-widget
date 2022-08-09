@@ -22,7 +22,7 @@
 
                 <div class="container current_weather_parameters">
                     <div class="text temperature parameter feels_like__parameter"><b>Feels like</b> {{weather.main.feels_like > 0 ? '+' : ''}} {{weather.main.feels_like}} </div>
-                    <div class="text parameter wind__parameter">Wind: {{ weather.wind.speed }} ms, W</div>
+                    <div class="text parameter wind__parameter">Wind: {{ weather.wind.speed }} m/s</div>
                     <div class="text parameter pressure__parameter">Pressure: {{ weather.main.pressure }}mmHg</div>
                 </div>
             </div>
