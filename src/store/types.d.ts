@@ -5,14 +5,14 @@ export interface WidgetState extends WeatherInfo {
 
 export interface RequestParams {
     city: string;
-    lat: number;
-    lon: number;
+    lat?: number;
+    lon?: number;
     unit: string;
 }
 
 export interface WeatherInfo {
     coord: Coord,
-    weather: Array<Weather>;
+    weather: Weather;
     main: Main;
     name: String;
     wind: Wind;
