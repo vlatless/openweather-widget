@@ -43,4 +43,14 @@
         border-bottom: none;
     }
 }
+
+.not_found_container {
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+
+    .not_found_text {
+        color: gray;
+    }
+}
  
