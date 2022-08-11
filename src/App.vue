@@ -11,17 +11,21 @@ import Settings from "./components/Settings.vue"
 import { onBeforeMount, onMounted } from '@vue/runtime-core';
 import { useStore } from './store';
 import { api } from './operations/api';
-import { RequestParams, WeatherInfo } from './store/types';
+import { LocalTime, RequestParams, Units, WeatherInfo } from './store/types';
 import { ACTIONS } from './store/actions';
 import { watch } from 'vue';
 import { cookie } from './operations/cookie';
 import  config  from "./../app.config.json";
+import { messages } from './locales/messages';
+import { useI18n } from 'vue-i18n';
 
 const store = useStore();
+const locale = useI18n().locale;
 
 onBeforeMount(async () => {
     if (await isGeolocationPermitted() === false)
-        store.dispatch(ACTIONS.setError, );
+        store.dispatch(ACTIONS.setError, messages.unableFetchData);
+            locale.value = store.state.lang;    
     if (!store.state.coord)
         setInitialUserWeather();
 });
@@ -38,11 +42,13 @@ function setInitialUserWeather() {
                 city: '',
                 lat: position.coords.latitude,
                 lon: position.coords.longitude,
-                unit: store.state.unit
+                unit: store.state.unit,
+                lang: store.state.lang
             } as RequestParams)
         ).json() as WeatherInfo;
 
         store.dispatch(ACTIONS.setWeatherInfo, weatherInfo);
+        store.dispatch(ACTIONS.setLocations, [weatherInfo.name]);
     }, () => {});
 }
 

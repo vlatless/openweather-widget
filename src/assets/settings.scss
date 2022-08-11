@@ -22,8 +22,16 @@
 
 .input__group {
     align-items: center;
-    column-gap: 10px;
-    grid-template-columns: auto 16px;
+    column-gap: 20px;
+    grid-template-columns: auto 30px 25px 25px;
+}
+
+.locale__select {
+    width: 40px;
+}
+
+.unit__select {
+    width: fit-content;
 }
 
 .locations__container {

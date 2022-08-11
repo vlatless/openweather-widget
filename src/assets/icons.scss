@@ -5,8 +5,8 @@
     }
 
     &.current_weather_icon {
-        height: 64px;
-        width: 64px;
+        height: 86px;
+        width: 86px;
     }
 
     &.gear__icon {
@@ -17,5 +17,10 @@
            transform: rotateZ(180deg);
            transition-duration: 800ms;
         }
+    }
+
+    &.icon__sun {
+        height: 40px;
+        width: 40px;
     }
 }

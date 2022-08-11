@@ -30,6 +30,11 @@
     }
 }
 
+.select {
+    border-color: transparent;
+    border-bottom: 2px solid gainsboro;
+}
+
 ::-webkit-scrollbar
 {
   width: 4px;  /* for vertical scrollbars */

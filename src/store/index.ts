@@ -1,4 +1,4 @@
-import { System, Weather, Wind } from './types.d';
+import { System, Weather, Wind, Langs, Units, LocalTime } from './types.d';
 import { actions } from "./actions";
 import { mutations } from "./mutations";
 import { InjectionKey } from "vue";
@@ -7,6 +7,7 @@ import { createStore, useStore as baseUseStore, Store } from "vuex";
 import { Main, WidgetState } from "./types";
 import  { cookie } from "../operations/cookie";
 import config from "../../app.config.json";
+import { number } from '@intlify/core-base';
 
 
 const savedState = cookie.getCookie(config.stateCookieName);
@@ -14,18 +15,17 @@ const savedState = cookie.getCookie(config.stateCookieName);
 const state: WidgetState = savedState !== undefined 
     ? JSON.parse(savedState) 
     : {
-        coord: {
-            lat: 0,
-            lon: 0
-        },
+        coord:undefined,
         weather: {} as Weather,
         wind: {} as Wind,
         error: '',
         main: { } as Main,
-        unit: 'metric',
+        unit: Units.metric,
         name: '',
         sys: {} as System,
-        locations: []
+        locations: [],
+        lang: Langs.en,
+        dt: number
     };
 
 // Для идентификации стора в функции useStore

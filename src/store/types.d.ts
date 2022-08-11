@@ -1,7 +1,8 @@
 export interface WidgetState extends WeatherInfo {
-    unit: Unit;
+    unit: Units;
     error: string;
     locations: Array<string>;
+    lang: Langs;
 }
 
 export interface System {
@@ -14,7 +15,8 @@ export interface RequestParams {
     city: string;
     lat?: number;
     lon?: number;
-    unit: string;
+    unit: Units;
+    lang: Langs
 }
 
 export interface WeatherInfo {
@@ -24,6 +26,7 @@ export interface WeatherInfo {
     name: String;
     wind: Wind;
     sys: System;
+    dt: number;
 }
 
 export interface Weather {
@@ -47,10 +50,34 @@ export interface Main {
     humidity: number;
 }
 
+export interface LocalTime {
+  year: number,
+  month: number,
+  day: number,
+  hour: number,
+  minute: number,
+  seconds: number,
+  milliSeconds: number,
+  dateTime: string,
+  date: string,
+  time: string,
+  timeZone: string,
+  dayOfWeek: string,
+}
+
 export interface Wind {
     speed: number;
     gust: number;
     deg: number;
 }
 
-type Unit = 'metric' | 'imperial' | 'kelvin';
+export enum Langs {
+    en = 'en',
+    ru = 'ru'
+}
+
+export enum Units {
+    metric = 'metric',
+    imperial = 'imperial',
+    kelvin = 'kelvin',
+}

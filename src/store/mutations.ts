@@ -1,4 +1,4 @@
-import { Coord, Main, Weather, Wind, System } from './types.d';
+import { Coord, Main, Weather, Wind, System, Langs, Units, LocalTime } from './types.d';
 import { MutationTree } from "vuex";
 import { WidgetState } from "./types";
 import { convertFromMBarToMmHg } from '../operations/pressureConverter';
@@ -32,5 +32,17 @@ export const mutations: MutationTree<WidgetState> = {
     },
     locations(state, locations: Array<string>) {
         state.locations = [...locations];
+    },
+    error(state, error: string) {
+        state.error = error;
+    },
+    lang(state, lang: Langs) {
+        state.lang = lang;
+    },
+    unit(state, unit: Units) {
+        state.unit = unit;
+    },
+    localTime(state, dt: number) {
+        state.dt = dt;
     }
 };

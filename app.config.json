@@ -1,0 +1,7 @@
+{
+    "publicKey": "",
+    "publicUrl": "https://api.openweathermap.org/data/2.5/weather",
+    "iconsSrc": "http://openweathermap.org/img/wn/",
+    "stateCookieName": "stateWidget",
+    "localTimeUrl": "https://timeapi.io/api/Time/current/coordinate"
+}

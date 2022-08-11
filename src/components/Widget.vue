@@ -1,15 +1,17 @@
 <template>
     <div class="widget">
-        <div v-if="store.state.error === ''">
+        <div :style="{height: '100%'}" v-if="store.state.error === ''">
             <div class="container head__container">
                 <div class="text city-header"> 
                     {{store.state.name}}, {{store.state.sys.country}}
                     <img class="icon icon__default" src="../assets/svg/location.svg"/> 
                 </div>
-                <!-- <div class="contaner sun_container">
-                    <div class="sunrise">  </div>
-                    <div class="sunset"></div>
-                </div> -->
+                <div class="container sun_container">
+                    <img class="icon icon__sun" src="../assets/svg/sunrise.svg"/> 
+                    <div class="text sunrise"> {{sunriseTime}}</div>
+                    <img class="icon icon__sun" src="../assets/svg/sunset.svg"/> 
+                    <div class="text sunset"> {{sunsetTime}}</div>
+                </div>
                 <span @click="toggleSettings">
                     <img v-if="isSettingOpen == false" class="icon gear__icon" src="../assets/svg/gear.svg"/>
                     <img v-else class="icon icon__default" src="../assets/svg/close.svg"/>
@@ -26,9 +28,10 @@
                     </div>
 
                     <div class="container current_weather_parameters">
-                        <div class="text temperature parameter feels_like__parameter"><b>Feels like</b> {{store.state.main.feels_like > 0 ? '+' : ''}} {{store.state.main.feels_like}} </div>
-                        <div class="text parameter wind__parameter">Wind: {{ store.state.wind.speed }} m/s</div>
-                        <div class="text parameter pressure__parameter">Pressure: {{ store.state.main.pressure }}mmHg</div>
+                        <div class="text temperature parameter feels_like__parameter"><b>{{locale(messages.feelsLike)}}</b> {{store.state.main.feels_like > 0 ? '+' : ''}} {{store.state.main.feels_like}} </div>
+                        <div class="text parameter wind__parameter">{{locale(messages.wind)}}: {{ store.state.wind.speed }} m/s</div>
+                        <div class="text parameter pressure__parameter">{{locale(messages.pressure)}}: {{ store.state.main.pressure }}mmHg</div> 
+                        <div class="text parameter description">{{store.state.weather.description}}</div>
                     </div>
                 </div>
             </div>
@@ -46,10 +49,16 @@ import { useStore } from "../store";
 import { ref, watch} from "vue";
 import config from "../../app.config.json";
 import { cookie } from "../operations/cookie";
+import { useI18n } from "vue-i18n";
+import { messages } from "../locales/messages";
+
 
 const store = useStore();
+const locale = useI18n().t;
 
 const isSettingOpen = ref(false);
+const sunsetTime = ref( new Date(store.state.sys.sunset * 1000).toLocaleTimeString().slice(0,-3));
+const sunriseTime = ref(new Date(store.state.sys.sunrise * 1000).toLocaleTimeString().slice(0,-3));
 
 function toggleSettings() {
     isSettingOpen.value = !isSettingOpen.value;

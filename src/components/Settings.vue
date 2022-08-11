@@ -2,10 +2,13 @@
     <div class="settings">
         <div class="container settings__container">
             <div class="container input__group">
-                <input class="input search__input" placeholder="Search new location" v-model="searchableString">
-                <button class="button search__button">
-                    <img class="icon icon__default" src="../assets/svg/search.svg"/>
-                </button>
+                <input class="input search__input" :placeholder="t(messages.searchNewLocation)" v-model="searchableString">
+                <select class="select locale__select" v-model="selectedLang">
+                    <option v-for="(lang, index) in Langs" :key="'lang' + index" :value="lang">{{lang}}</option>
+                </select>
+                <select class="select unit__select" v-model="selectedUnit">
+                    <option v-for="(unit, index) in Units" :key="'unit' + index" :value="unit">{{unit}}°</option>
+                </select>
             </div>
             <div class="container locations__container"  v-if="searchableString === ''">
                 <VueDraggableNext v-model="locations">
@@ -22,7 +25,7 @@
                     <img class="icon icon__default" @click="setLocations" src="../assets/svg/plus.svg"/>
                 </div>
                 <div v-if="isLocationFound === false && searchableString !== ''" class="container not_found_container">
-                    <div class="text not_found_text"> {{searchableString}} Not Found</div>
+                    <div class="text not_found_text"> {{searchableString}} {{t(messages.notFound)}} </div>
                 </div>
             </div>
         </div>
@@ -31,18 +34,24 @@
 
 <script setup lang="ts">
 import { api } from '../operations/api';
-import { RequestParams } from '../store/types';
+import { RequestParams, Langs, Units } from '../store/types';
 import { ref, watch } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
 import { useStore } from '../store';
 import { ACTIONS } from '../store/actions';
+import { useI18n } from "vue-i18n";
+import { messages } from "../locales/messages";
 
 const store = useStore();
+const t = useI18n().t;
+const locale = useI18n().locale;
 
 const locations = ref<Array<string>>(store.state.locations.slice());
 const searchableString = ref('');
 const isLocationFound = ref(true);
 const displayedCheckBoxIndex = ref();
+const selectedLang = ref(store.state.lang);
+const selectedUnit = ref(store.state.unit);
 
 watch(() => searchableString.value, async () => {
     const resp = await api.fetchData({ city: searchableString.value } as RequestParams);
@@ -56,6 +65,18 @@ watch(() => searchableString.value, async () => {
 watch(() => locations.value, () => {
     store.dispatch(ACTIONS.setLocations, locations.value);
 }, { deep: true });
+
+watch(() => [selectedLang.value, selectedUnit.value], () => {
+    store.dispatch(ACTIONS.setLang, selectedLang.value);
+    store.dispatch(ACTIONS.setUnit, selectedUnit.value);
+    selectAndSetNewWeatherData({ 
+            city: store.state.name, 
+            unit: store.state.unit, 
+            lang: store.state.lang
+        } as RequestParams);
+
+    locale.value = selectedLang.value;
+});
 
 function setLocations() {
     locations.value.push(searchableString.value);
@@ -75,7 +96,11 @@ function displayCheckbox(index: number) {
 }
 
 async function selectNewLocation(location: string) {
-    const weatherInfo = await (await api.fetchData({ city:location, unit: store.state.unit } as RequestParams)).json();
+    await selectAndSetNewWeatherData({ city:location, unit: store.state.unit } as RequestParams);
+}
+
+async function selectAndSetNewWeatherData(params: RequestParams) {
+    const weatherInfo = await (await api.fetchData(params)).json();
     store.dispatch(ACTIONS.setWeatherInfo, weatherInfo);
 }
 
