@@ -14,7 +14,8 @@
 		"importHelpers": true,
 		"baseUrl": "src",
 		"paths": {
-			"@/*": ["./*"]
+			"@operations": ["./src/operations"],
+			"@store": ["./src/store"]
 		},
 		"isolatedModules": true,
 		"types": ["vite/client", "src/**/*.d.ts", "@types/node"]

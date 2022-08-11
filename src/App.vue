@@ -13,13 +13,23 @@ import { useStore } from './store';
 import { api } from './operations/api';
 import { RequestParams, WeatherInfo } from './store/types';
 import { ACTIONS } from './store/actions';
-
+import { watch } from 'vue';
+import { cookie } from './operations/cookie';
+import  config  from "./../app.config.json";
 
 const store = useStore();
 
-onBeforeMount(() => {
-    setInitialUserWeather();
+onBeforeMount(async () => {
+    if (await isGeolocationPermitted() === false)
+        store.dispatch(ACTIONS.setError, );
+    if (!store.state.coord)
+        setInitialUserWeather();
 });
+
+watch(() => store.state, () => {
+    const jsonState = JSON.stringify(store.state);
+    cookie.setCookie(config.stateCookieName, jsonState);
+}, { deep: true });
 
 function setInitialUserWeather() {
     navigator.geolocation.getCurrentPosition(async position => {
@@ -32,11 +42,17 @@ function setInitialUserWeather() {
             } as RequestParams)
         ).json() as WeatherInfo;
 
-        store.dispatch(ACTIONS.setInitialCoord, weatherInfo.coord);
-        store.dispatch(ACTIONS.setWeather, weatherInfo.weather);
-        store.dispatch(ACTIONS.setMain, weatherInfo.main);
-        store.dispatch(ACTIONS.setName, weatherInfo.name);
-        store.dispatch(ACTIONS.setWind, weatherInfo.wind);
+        store.dispatch(ACTIONS.setWeatherInfo, weatherInfo);
     }, () => {});
+}
+
+async function isGeolocationPermitted() {
+    let isPremitted;
+    const state = await (await navigator.permissions.query({ name: 'geolocation' })).state;
+
+    if (state === "denied") isPremitted = false;
+    else if (state === "granted") isPremitted = true;
+
+    return isPremitted
 }
 </script>

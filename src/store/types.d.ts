@@ -1,6 +1,13 @@
 export interface WidgetState extends WeatherInfo {
     unit: Unit;
     error: string;
+    locations: Array<string>;
+}
+
+export interface System {
+    country: string;
+    sunrise: number;
+    sunset: number;
 }
 
 export interface RequestParams {
@@ -16,6 +23,7 @@ export interface WeatherInfo {
     main: Main;
     name: String;
     wind: Wind;
+    sys: System;
 }
 
 export interface Weather {

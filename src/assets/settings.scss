@@ -1,7 +1,12 @@
+.settings {
+    height: 100%;
+}
+
 .settings__container {
+    height: 100%;
     grid-template-areas: 
     "h h h e"
-    "list list list list";
+    "con con con con";
     grid-template-rows: 20px auto;
     row-gap: 10px;
 }
@@ -11,6 +16,10 @@
     width: fit-content;
 }
 
+.search_result_container {
+    grid-area: con;
+}
+
 .input__group {
     align-items: center;
     column-gap: 10px;
@@ -18,11 +27,11 @@
 }
 
 .locations__container {
-    height: 30%;
+    height: 60%;
     width: 100%;
     overflow-y: scroll;
     border-radius: 5px;
-    grid-area: list;
+    grid-area: con;
 
     &:last-child {
        border-bottom: none;
@@ -31,9 +40,11 @@
 
 .location {
     display: grid;
-    grid-template-columns: 1fr 15fr 1fr;
+    grid-template-columns: 1fr auto 15fr 1fr;
+    grid-column-gap: 3px;
     cursor: pointer;
     border-bottom: 1px solid black;
+    align-items: center;
 
     &:hover {
         color: blue
