@@ -1,10 +1,5 @@
 .widget {
-    padding: 5px 10px 0px 10px;
-    width: 420px;
-    height: 170px;
-    border: 1px solid black;
-    border-radius: 10px;
-
+    height: 100%;
     .head__container {
         align-items: center;
         grid-template-columns: auto auto 16px;
