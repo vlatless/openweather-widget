@@ -20,7 +20,7 @@
             <div v-if="isSettingOpen == false">
                 <br/>
                 <div class="container widget__container">
-                    <img class="icon current_weather_icon" :src="config.iconsSrc + store.state.weather?.icon + '@2x.png'"/>
+                    <img class="icon current_weather_icon" :src="config.iconsSrc + store.state.weather[0]?.icon + '@2x.png'"/>
                     <div class="container current_temperature_container">
                         <div class="temperature current__temperature"> {{temperature.temp}} </div>
                         <div class="text temperature avg__temperature" id="min__temperature"> {{temperature.temp_min}} </div>
@@ -30,8 +30,8 @@
                     <div class="container current_weather_parameters">
                         <div class="text temperature parameter feels_like__parameter"><b>{{locale(messages.feelsLike)}}</b> {{temperature.feels_like}} </div>
                         <div class="text parameter wind__parameter">{{locale(messages.wind)}}: {{ store.state.wind.speed }} m/s</div>
-                        <div class="text parameter pressure__parameter">{{locale(messages.pressure)}}: {{ store.state.main.pressure }}mmHg</div> 
-                        <div class="text parameter description">{{store.state.weather.description}}</div>
+                        <div class="text parameter pressure__parameter">{{locale(messages.pressure)}}: {{ pressure }} mmHg</div> 
+                        <div class="text parameter description">{{store.state.weather[0]?.description}}</div>
                     </div>
                 </div>
             </div>
@@ -61,6 +61,7 @@ const isSettingOpen = ref(false);
 
 const sunTime = ref({} as FormattedSunTime);
 const temperature = ref({} as FormattedTemperature);
+const pressure = ref(0);
 
 watch(() => store.getters.sunTime, () => {
     sunTime.value.sunset =  store.getters.sunTime.sunset
@@ -72,6 +73,10 @@ watch(() => store.getters.temperature, () => {
     temperature.value.temp = store.getters.temperature.temp,
     temperature.value.temp_max = store.getters.temperature.temp_max,
     temperature.value.temp_min = store.getters.temperature.temp_min
+});
+
+watch(() => store.getters.pressure, () => {
+    pressure.value = store.getters.pressure.pressure;
 });
 
 function toggleSettings() {

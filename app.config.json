@@ -1,5 +1,5 @@
 {
-    "publicKey": "",
+    "publicKey": "327bf581de87f16e095545493055cae3",
     "publicUrl": "https://api.openweathermap.org/data/2.5/weather",
     "iconsSrc": "http://openweathermap.org/img/wn/",
     "stateCookieName": "stateWidget",

@@ -9,7 +9,14 @@ export default defineConfig({
 	plugins: [vue(), 
 	vueI18n({
 		include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales'),
-	 })],
+	})],
+	build: {
+		rollupOptions: {
+		  output: {
+			manualChunks: {}
+		  },
+		},
+	},
 	optimizeDeps: { exclude: ["swiper/vue", "swiper/types"] },
 	resolve: {
 		alias: { find: "@/*", replacement: "./*" },

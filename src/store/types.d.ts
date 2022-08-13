@@ -26,7 +26,7 @@ export interface RequestParams {
 
 export interface WeatherInfo {
     coord: Coord,
-    weather: Weather;
+    weather: Array<Weather>;
     main: Main;
     name: String;
     wind: Wind;

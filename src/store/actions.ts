@@ -34,7 +34,7 @@ export const actions: ActionTree<WidgetState, WidgetState> = {
 		commit("coord", data);
 	},
 	setWeather({ commit }, data: Array<Weather>) {
-		commit("weather", data.pop());
+		commit("weather", data);
 	},
 	setMain({ commit }, data: Main) {
 		commit("main", data);

@@ -3,6 +3,9 @@ import App  from './App.vue';
 import { createApp } from "vue";
 import {store, key} from "./store";
 import { createI18n, useI18n } from 'vue-i18n';
+import vueCustomElement from 'vue-custom-element';
+
+import 'document-register-element/build/document-register-element';
 
 import en from './locales/en.json';
 import ru from './locales/ru.json';
@@ -21,6 +24,8 @@ const app = createApp(App);
 })();
 
 function mountApp() {
-    app.use(i18n).use(store, key).mount("#root")
-    app.config.performance = true;
+    app
+    .use(vueCustomElement)
+    .use(i18n)
+    .use(store, key).mount("vue-widget")
 }

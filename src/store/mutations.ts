@@ -9,16 +9,16 @@ export const mutations: MutationTree<WidgetState> = {
         state.coord = coord;
     },
     weather(state, weather: Array<Weather>) {
-        state.weather = weather[0];
+        state.weather = weather;
     },
     main(state, main: Main) {
         state.main =  {
-            temp:  Math.round(main.temp),
-            feels_like: Math.round(main.feels_like),
-            temp_min: Math.round(main.temp_min),
-            temp_max: Math.round(main.temp_max),
-            pressure: Math.round(convertFromMBarToMmHg(main.pressure)),
-            humidity: Math.round(main.humidity)
+            temp: main.temp,
+            feels_like: main.feels_like,
+            temp_min: main.temp_min,
+            temp_max: main.temp_max,
+            pressure: main.pressure,
+            humidity: main.humidity
         } as Main
     },
     sys(state, sys: System) {

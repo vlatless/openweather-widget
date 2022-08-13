@@ -23,7 +23,6 @@ const store = useStore();
 const locale = useI18n().locale;
 const savedState = localStorage.getItem(config.stateCookieName);
 onMounted(async () => {
-     
     locale.value = store.state.lang;
 
     if (await isGeolocationPermitted() === false)
@@ -39,7 +38,7 @@ onMounted(async () => {
 watch(() => store.state, () => {
     setTimeout(() => {
         localStorage.setItem(config.stateCookieName, JSON.stringify(store.state));
-    }, 1000);
+    });
 }, { deep: true });
 
 function setInitialUserWeather() {

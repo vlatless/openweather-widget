@@ -4,6 +4,7 @@ export module formatter {
     };
 
     export function formatTemperature(t: number) {
+        t = Math.round(t);
         return t > 0 ? '+' + t : t
     }
 }
