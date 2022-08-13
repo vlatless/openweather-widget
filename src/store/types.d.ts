@@ -11,6 +11,11 @@ export interface System {
     sunset: number;
 }
 
+export interface FormattedSunTime {
+    sunrise: string;
+    sunset: string;
+}
+
 export interface RequestParams {
     city: string;
     lat?: number;
@@ -28,7 +33,6 @@ export interface WeatherInfo {
     sys: System;
     dt: number;
 }
-
 export interface Weather {
     id: number;
     main: string;
@@ -48,6 +52,12 @@ export interface Main {
     temp_max: number;
     pressure: number;
     humidity: number;
+}
+export interface FormattedTemperature {
+    temp: string
+    feels_like: string;
+    temp_min: string;
+    temp_max: string;
 }
 
 export interface LocalTime {
