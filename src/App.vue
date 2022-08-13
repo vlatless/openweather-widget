@@ -24,15 +24,16 @@ const locale = useI18n().locale;
 const savedState = localStorage.getItem(config.stateCookieName);
 onMounted(async () => {
     locale.value = store.state.lang;
-
     if (await isGeolocationPermitted() === false)
         store.dispatch(ACTIONS.setError, messages.unableFetchData); 
+    else {
+        store.dispatch(ACTIONS.setError, "");
+    }
 
     if (savedState !== null)
         store.dispatch(ACTIONS.setWeatherInfo, JSON.parse(savedState!));
     else
         setInitialUserWeather();
- 
 });
 
 watch(() => store.state, () => {
