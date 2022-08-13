@@ -10,12 +10,15 @@ export default defineConfig({
 	vueI18n({
 		include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales'),
 	})],
-	base: "/vlatless/",
+	base: "./",
 	build: {
 		rollupOptions: {
-		  output: {
-			manualChunks: {}
-		  },
+			input: {
+				main: resolve(__dirname, 'index.html'),
+			},
+			output: {
+				manualChunks: {}
+			},
 		},
 	},
 	optimizeDeps: { exclude: ["swiper/vue", "swiper/types"] },
