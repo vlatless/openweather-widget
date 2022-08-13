@@ -8,9 +8,9 @@
                 </div>
                 <div class="container sun_container">
                     <img class="icon icon__sun" src="../assets/svg/sunrise.svg"/> 
-                    <div class="text sunrise"> {{sunriseTime}}</div>
+                    <div class="text sunrise"> {{sunTime.sunrise}}</div>
                     <img class="icon icon__sun" src="../assets/svg/sunset.svg"/> 
-                    <div class="text sunset"> {{sunsetTime}}</div>
+                    <div class="text sunset"> {{sunTime.sunset}}</div>
                 </div>
                 <span @click="toggleSettings">
                     <img v-if="isSettingOpen == false" class="icon gear__icon" src="../assets/svg/gear.svg"/>
@@ -22,13 +22,13 @@
                 <div class="container widget__container">
                     <img class="icon current_weather_icon" :src="config.iconsSrc + store.state.weather?.icon + '@2x.png'"/>
                     <div class="container current_temperature_container">
-                        <div class="temperature current__temperature"> {{store.state.main.temp > 0 ? '+' : ''}}{{store.state.main.temp}} </div>
-                        <div class="text temperature avg__temperature" id="min__temperature"> {{store.state.main.temp_min > 0 ? '+' : ''}} {{store.state.main.temp_min}} </div>
-                        <div class="text temperature avg__temperature" id="max__temperature"> {{store.state.main.temp_max > 0 ? '+' : ''}} {{store.state.main.temp_max}} </div>
+                        <div class="temperature current__temperature"> {{temperature.temp}} </div>
+                        <div class="text temperature avg__temperature" id="min__temperature"> {{temperature.temp_min}} </div>
+                        <div class="text temperature avg__temperature" id="max__temperature"> {{temperature.temp_max}} </div>
                     </div>
 
                     <div class="container current_weather_parameters">
-                        <div class="text temperature parameter feels_like__parameter"><b>{{locale(messages.feelsLike)}}</b> {{store.state.main.feels_like > 0 ? '+' : ''}} {{store.state.main.feels_like}} </div>
+                        <div class="text temperature parameter feels_like__parameter"><b>{{locale(messages.feelsLike)}}</b> {{temperature.feels_like}} </div>
                         <div class="text parameter wind__parameter">{{locale(messages.wind)}}: {{ store.state.wind.speed }} m/s</div>
                         <div class="text parameter pressure__parameter">{{locale(messages.pressure)}}: {{ store.state.main.pressure }}mmHg</div> 
                         <div class="text parameter description">{{store.state.weather.description}}</div>
@@ -46,19 +46,33 @@ import Settings from "../components/Settings.vue"
 import Error from "../components/Error.vue"
 
 import { useStore } from "../store";
-import { ref, watch} from "vue";
+import { onBeforeMount, onMounted, ref, watch} from "vue";
 import config from "../../app.config.json";
 import { cookie } from "../operations/cookie";
 import { useI18n } from "vue-i18n";
 import { messages } from "../locales/messages";
+import { FormattedSunTime, FormattedTemperature } from "store/types";
 
 
 const store = useStore();
 const locale = useI18n().t;
 
 const isSettingOpen = ref(false);
-const sunsetTime = ref( new Date(store.state.sys.sunset * 1000).toLocaleTimeString().slice(0,-3));
-const sunriseTime = ref(new Date(store.state.sys.sunrise * 1000).toLocaleTimeString().slice(0,-3));
+
+const sunTime = ref({} as FormattedSunTime);
+const temperature = ref({} as FormattedTemperature);
+
+watch(() => store.getters.sunTime, () => {
+    sunTime.value.sunset =  store.getters.sunTime.sunset
+    sunTime.value.sunrise = store.getters.sunTime.sunrise
+});
+
+watch(() => store.getters.temperature, () => {
+    temperature.value.feels_like = store.getters.temperature.feels_like,
+    temperature.value.temp = store.getters.temperature.temp,
+    temperature.value.temp_max = store.getters.temperature.temp_max,
+    temperature.value.temp_min = store.getters.temperature.temp_min
+});
 
 function toggleSettings() {
     isSettingOpen.value = !isSettingOpen.value;
