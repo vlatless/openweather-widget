@@ -1,0 +1,17 @@
+.error {
+    height: 100%;
+}
+
+.error__container {
+    height: inherit;
+    justify-content: center;
+    align-content: center;
+    row-gap: 5px;
+}
+
+.refresh__button {
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+    color: white;
+}

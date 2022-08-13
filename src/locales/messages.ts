@@ -4,5 +4,6 @@ export const messages = {
     pressure: "pressure",
     notFound: "notFound",
     searchNewLocation: "searchNewLocation",
-    unableFetchData: "unableFetchData"
+    unableFetchData: "unableFetchData",
+    refresh: "Refresh"
 }

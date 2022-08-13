@@ -3,5 +3,7 @@
     "wind": "Wind",
     "pressure": "Pressure",
     "notFound": "not Found",
-    "searchNewLocation": "Search new location" 
+    "searchNewLocation": "Search new location",
+    "unableFetchData": "Unable to fetch data",
+    "refresh": "Refresh"
 }

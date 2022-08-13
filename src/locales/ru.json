@@ -3,5 +3,7 @@
     "wind": "Ветер",
     "pressure": "Давление",
     "notFound": "не найдено",
-    "searchNewLocation": "Найти новое место" 
+    "searchNewLocation": "Найти новое место",
+    "unableFetchData": "Невозможно получить данные",
+    "refresh": "Обновить"
 }
