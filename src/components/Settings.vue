@@ -15,7 +15,9 @@
                     <div v-for="(location, index) in locations" @mouseover="displayCheckbox(index)" @mouseleave="displayCheckbox(NaN)" :key="index" class="text location">
                         <img class="icon icon__default" src="../assets/svg/hamburger.svg"/>
                         {{location}}
-                        <img v-if="displayedCheckBoxIndex === index" @click="selectNewLocation(location)" class="icon icon__default" src="../assets/svg/check.svg"/>
+                        <span>
+                            <img v-if="displayedCheckBoxIndex === index" @click="selectNewLocation(location)" class="icon icon__default" src="../assets/svg/check.svg"/>
+                        </span>
                         <img class="icon icon__default" @click="removeLocation(index)" src="../assets/svg/delete.svg"/>
                     </div>
                 </VueDraggableNext>

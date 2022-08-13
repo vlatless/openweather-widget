@@ -21,18 +21,25 @@ import { useI18n } from 'vue-i18n';
 
 const store = useStore();
 const locale = useI18n().locale;
+const savedState = localStorage.getItem(config.stateCookieName);
+onMounted(async () => {
+     
+    locale.value = store.state.lang;
 
-onBeforeMount(async () => {
     if (await isGeolocationPermitted() === false)
-        store.dispatch(ACTIONS.setError, messages.unableFetchData);
-            locale.value = store.state.lang;    
-    if (!store.state.coord)
+        store.dispatch(ACTIONS.setError, messages.unableFetchData); 
+
+    if (savedState !== null)
+        store.dispatch(ACTIONS.setWeatherInfo, JSON.parse(savedState!));
+    else
         setInitialUserWeather();
+ 
 });
 
 watch(() => store.state, () => {
-    const jsonState = JSON.stringify(store.state);
-    cookie.setCookie(config.stateCookieName, jsonState);
+    setTimeout(() => {
+        localStorage.setItem(config.stateCookieName, JSON.stringify(store.state));
+    }, 1000);
 }, { deep: true });
 
 function setInitialUserWeather() {
