@@ -10,7 +10,7 @@ export default defineConfig({
 	vueI18n({
 		include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales'),
 	})],
-	base: "vlatless/",
+	base: "/vlatless/",
 	build: {
 		rollupOptions: {
 		  output: {
