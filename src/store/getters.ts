@@ -12,10 +12,10 @@ export const getters: GetterTree<WidgetState, WidgetState> = {
 	},
     temperature(state) {
         return {
-            temp: formatter.formatTemperature(state.main.temp),
-            feels_like: formatter.formatTemperature(state.main.feels_like),
-            temp_min: formatter.formatTemperature(state.main.temp_min),
-            temp_max: formatter.formatTemperature(state.main.temp_max)
+            temp: formatter.formatTemperature(state.main.temp, state.unit),
+            feels_like: formatter.formatTemperature(state.main.feels_like, state.unit),
+            temp_min: formatter.formatTemperature(state.main.temp_min, state.unit),
+            temp_max: formatter.formatTemperature(state.main.temp_max, state.unit)
         } as FormattedTemperature
     },
     pressure(state) {

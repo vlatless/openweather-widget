@@ -7,7 +7,7 @@
                     <option v-for="(lang, index) in Langs" :key="'lang' + index" :value="lang">{{lang}}</option>
                 </select>
                 <select class="select unit__select" v-model="selectedUnit">
-                    <option v-for="(unit, index) in Units" :key="'unit' + index" :value="unit">{{unit}}°</option>
+                    <option v-for="(unit, index) in Units" :key="'unit' + index" :value="unit">{{formatter.formatUnit(unit)}}°</option>
                 </select>
             </div>
             <div class="container locations__container"  v-if="searchableString === ''">
@@ -43,6 +43,7 @@ import { useStore } from '../store';
 import { ACTIONS } from '../store/actions';
 import { useI18n } from "vue-i18n";
 import { messages } from "../locales/messages";
+import { formatter } from "../operations/formatter";
 
 const store = useStore();
 const t = useI18n().t;
