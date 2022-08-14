@@ -51,7 +51,7 @@ import config from "../../app.config.json";
 import { cookie } from "../operations/cookie";
 import { useI18n } from "vue-i18n";
 import { messages } from "../locales/messages";
-import { FormattedSunTime, FormattedTemperature } from "store/types";
+import { FormattedSunTime, FormattedTemperature } from "../store/types";
 
 
 const store = useStore();
