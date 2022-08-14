@@ -12,6 +12,14 @@
     display: grid;
 }
 
+.input {
+    background-color: $background-color;
+    border-radius: 3px;
+    border: none;
+    caret-color: $text-color;
+    color: $text-color
+}
+
 .temperature {
     &:after {
         content: "°";
@@ -28,14 +36,15 @@
     }
 
     &:active {
-       outline: 1px solid black;
+       outline: 1px solid $background-color;
     }
 }
 
 .select {
     border-color: transparent;
-    border-bottom: 2px solid gainsboro;
-    background-color: inherit;
+
+    border-radius: 3px;
+    background-color: $background-color;
     color:$text-color;
 }
 
