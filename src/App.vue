@@ -11,7 +11,7 @@ import Settings from "./components/Settings.vue"
 import { onBeforeMount, onMounted } from '@vue/runtime-core';
 import { useStore } from './store';
 import { api } from './operations/api';
-import { LocalTime, RequestParams, Units, WeatherInfo } from './store/types';
+import { LocalTime, RequestParams, Units, WeatherInfo, WidgetState } from './store/types';
 import { ACTIONS } from './store/actions';
 import { watch } from 'vue';
 import { cookie } from './operations/cookie';
@@ -40,7 +40,8 @@ onMounted(async () => {
 
 watch(() => store.state, () => {
     setTimeout(() => {
-        localStorage.setItem(config.stateCookieName, JSON.stringify(store.state));
+        if (store.state.error === '')
+            localStorage.setItem(config.stateCookieName, JSON.stringify(store.state));
     });
 }, { deep: true });
 

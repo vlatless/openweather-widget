@@ -4,6 +4,6 @@
     "pressure": "Pressure",
     "notFound": "not Found",
     "searchNewLocation": "Search new location",
-    "unableFetchData": "Unable to fetch data",
+    "unableFetchData": "Allow location",
     "refresh": "Refresh"
 }
