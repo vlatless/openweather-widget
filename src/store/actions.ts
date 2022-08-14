@@ -29,6 +29,7 @@ export const actions: ActionTree<WidgetState, WidgetState> = {
         store.dispatch(ACTIONS.setName, data.name);
         store.dispatch(ACTIONS.setWind, data.wind);
 		store.dispatch(ACTIONS.setLocalTime, data.dt);
+		store.dispatch(ACTIONS.setLocations, data.locations);
 	},
 	setInitialCoord({ commit }, data: Coord) {
 		commit("coord", data);

@@ -1,5 +1,5 @@
 import config  from "../../app.config.json";
-import { RequestParams } from '../store/types';
+import { RequestParams, WeatherInfo } from '../store/types';
 
 export module api {
     export async function fetchData(request: RequestParams) {
@@ -30,5 +30,15 @@ export module api {
             });
 
         return response;
+    }
+
+    export async function isGeolocationPermitted() {
+        let isPremitted;
+        const state = await (await navigator.permissions.query({ name: 'geolocation' })).state;
+    
+        if (state === "denied") isPremitted = false;
+        else if (state === "granted") isPremitted = true;
+    
+        return isPremitted
     }
 };

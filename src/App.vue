@@ -22,9 +22,11 @@ import { useI18n } from 'vue-i18n';
 const store = useStore();
 const locale = useI18n().locale;
 const savedState = localStorage.getItem(config.stateCookieName);
+
 onMounted(async () => {
     locale.value = store.state.lang;
-    if (await isGeolocationPermitted() === false)
+
+    if (await api.isGeolocationPermitted() === false && savedState === null)
         store.dispatch(ACTIONS.setError, messages.unableFetchData); 
     else {
         store.dispatch(ACTIONS.setError, "");
@@ -55,17 +57,6 @@ function setInitialUserWeather() {
         ).json() as WeatherInfo;
 
         store.dispatch(ACTIONS.setWeatherInfo, weatherInfo);
-        store.dispatch(ACTIONS.setLocations, [weatherInfo.name]);
     }, () => {});
-}
-
-async function isGeolocationPermitted() {
-    let isPremitted;
-    const state = await (await navigator.permissions.query({ name: 'geolocation' })).state;
-
-    if (state === "denied") isPremitted = false;
-    else if (state === "granted") isPremitted = true;
-
-    return isPremitted
 }
 </script>
