@@ -4,6 +4,16 @@
 @import "./icons.scss";
 @import "./error.scss";
 
+.app__container {
+    backdrop-filter: blur(10px);
+    background: $background-color;
+    color: $text-color; 
+    padding: 5px 10px 0px 10px;
+    width: 420px;
+    height: 170px;
+    border: 1px solid black;
+    border-radius: 10px;     
+}
 
 @font-face {
     font-family: 'Roboto';

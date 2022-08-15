@@ -1,12 +1,16 @@
 <template>
-    <Widget/>
+    <div class="contaier app__container">
+        <Widget v-if="store.state.coord !== undefined"/> 
+        <Error v-else/>       
+    </div>
 </template>
 
 <script setup lang="ts">
 import './assets/_index.scss';
 
 import Widget from "./components/Widget.vue";
-import Settings from "./components/Settings.vue"
+import Settings from "./components/Settings.vue";
+import Error from "./components/Error.vue";
 
 import { onBeforeMount, onMounted } from '@vue/runtime-core';
 import { useStore } from './store';
