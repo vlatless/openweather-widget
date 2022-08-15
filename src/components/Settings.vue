@@ -13,18 +13,18 @@
             <div class="container locations__container"  v-if="searchableString === ''">
                 <VueDraggableNext v-model="locations">
                     <div v-for="(location, index) in locations" @mouseover="displayCheckbox(index)" @mouseleave="displayCheckbox(NaN)" :key="index" class="text location">
-                        <img class="icon icon__default" src="../assets/svg/hamburger.svg"/>
+                        <Hamburger class="icon hamburger__icon"/>
                         {{location}}
                         <span>
-                            <img v-if="displayedCheckBoxIndex === index" @click="selectNewLocation(location)" class="icon icon__default" src="../assets/svg/check.svg"/>
+                            <Check v-if="displayedCheckBoxIndex === index" @click="selectNewLocation(location)" class="icon icon__default"/>
                         </span>
-                        <img class="icon icon__default" @click="removeLocation(index)" src="../assets/svg/delete.svg"/>
+                        <Delete class="icon icon__default" @click="removeLocation(index)"/>
                     </div>
                 </VueDraggableNext>
             </div>
             <div class="container search_result_container" v-if="searchableString !== ''">
                 <div v-if="isLocationFound && searchableString !== ''" class="text searchable__string">{{searchableString}}
-                    <img class="icon icon__default" @click="setLocations" src="../assets/svg/plus.svg"/>
+                    <Plus class="icon icon__default" @click="setLocations" />
                 </div>
                 <div v-if="isLocationFound === false && searchableString !== ''" class="container not_found_container">
                     <div class="text not_found_text"> {{searchableString}} {{t(messages.notFound)}} </div>
@@ -44,6 +44,12 @@ import { ACTIONS } from '../store/actions';
 import { useI18n } from "vue-i18n";
 import { messages } from "../locales/messages";
 import { formatter } from "../operations/formatter";
+
+//svg
+import Hamburger from '../assets/svg/hamburger.svg';
+import Check from '../assets/svg/check.svg';
+import Delete from '../assets/svg/delete.svg';
+import Plus from '../assets/svg/plus.svg';
 
 const store = useStore();
 const t = useI18n().t;

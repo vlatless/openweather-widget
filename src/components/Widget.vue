@@ -4,17 +4,17 @@
             <div class="container head__container">
                 <div class="text city-header"> 
                     {{store.state.name}}, {{store.state.sys.country}}
-                    <img class="icon icon__default" src="../assets/svg/location.svg"/> 
+                    <Location class="icon icon__default"/>
                 </div>
                 <div class="container sun_container">
-                    <img class="icon icon__sun" src="../assets/svg/sunrise.svg"/> 
+                    <Sunrise class="icon icon__sun"/>
                     <div class="text sunrise"> {{sunTime.sunrise}}</div>
-                    <img class="icon icon__sun" src="../assets/svg/sunset.svg"/> 
+                    <Sunset class="icon icon__sun"/>
                     <div class="text sunset"> {{sunTime.sunset}}</div>
                 </div>
                 <span @click="toggleSettings">
-                    <img v-if="isSettingOpen == false" class="icon gear__icon" src="../assets/svg/gear.svg"/>
-                    <img v-else class="icon icon__default" src="../assets/svg/close.svg"/>
+                    <Gear v-if="isSettingOpen == false" class="icon gear__icon"/>
+                    <Close v-else class="icon icon__default"/>
                 </span>
             </div>
             <div v-if="isSettingOpen == false">
@@ -53,6 +53,12 @@ import { useI18n } from "vue-i18n";
 import { messages } from "../locales/messages";
 import { FormattedSunTime, FormattedTemperature } from "../store/types";
 
+//svg
+import Location from '../assets/svg/location.svg';
+import Sunrise from '../assets/svg/sunrise.svg';
+import Sunset from '../assets/svg/sunset.svg';
+import Gear from '../assets/svg/gear.svg';
+import Close from '../assets/svg/close.svg';
 
 const store = useStore();
 const locale = useI18n().t;
